@@ -27,21 +27,28 @@
             </div>
         </div>
     </nav>
-
     <div class="container">
-      <ul id="messages">
-        <li class="well">Hello</li>
-        <li class="well">Hello</li>
-        <li class="well">Hello</li>
-      </ul>
+        <ul id="messages">
+        </ul>
+        <div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="input-group">
+                        <input id="nickname" type="text" class="form-control" placeholder="Your nickname...">
+                        <span class="input-group-btn">
+                  <button id="btn_nickname" class="btn btn-default" type="button">Go!</button>
+                </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
     <footer class="footer">
         <div class="container">
             <div class="input-group">
-                <input id="msg" type="text" class="form-control" placeholder="Search for...">
+                <input id="msg" type="text" class="form-control" placeholder="Your Message...">
                 <span class="input-group-btn">
-                  <button id="btn_send" class="btn btn-default" type="button">Go!</button>
+                  <button id="btn_send" class="btn btn-default" type="button">Send!</button>
                 </span>
             </div>
         </div>
@@ -51,7 +58,7 @@
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script>
-      App.init();
+    App.init();
     </script>
 </body>
 

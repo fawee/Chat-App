@@ -6,18 +6,24 @@ var io = require('socket.io')(http);
 app.use(express.static('public'));
 
 app.get('/', function(req, res) {
-    
+
 });
 
 io.on('connection', function(socket) {
-    console.log('a user connected');
+    socket.on("new_user", function(username) {
+        socket.username = username;
+        socket.broadcast.emit("connected", socket.username);
+    });
 
     socket.on('disconnect', function() {
-        console.log('user disconnected');
+        socket.broadcast.emit("disconnected", socket.username);
     });
 
     socket.on('msg', function(msg) {
-        io.emit('msg', msg);
+        io.emit('msg', {
+            username: socket.username,
+            msg: msg
+        });
     });
 });
 

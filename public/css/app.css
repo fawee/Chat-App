@@ -5,14 +5,27 @@ html {
 
 ul {
   list-style-type: none;
+  margin-bottom: 70px;
 }
 
 .well {
   padding: 10px;
 }
 
+.connected {
+  background-color: #2ecc71;
+}
+
+.disconnected {
+  background-color: #c0392b;
+}
+
+.modal-content {
+  padding: 40px;
+}
+
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
