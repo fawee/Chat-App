@@ -39,6 +39,14 @@ io.on('connection', function(socket) {
             msg: msg
         });
     });
+
+    socket.on("typing", function(user) {
+    	socket.broadcast.emit("typing", user);
+    });
+
+    socket.on("stop-typing", function(user) {
+    	socket.broadcast.emit("stop-typing", user);
+    });
 });
 
 http.listen(3000, function() {

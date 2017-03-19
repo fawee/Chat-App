@@ -3,7 +3,9 @@ var App = (function() {
         socket,
         messages = document.getElementById("messages"),
         nickname = document.getElementById("nickname"),
-        onlineUsersList = document.getElementById("dropdown-users");
+        onlineUsersList = document.getElementById("dropdown-users"),
+        typingBox = document.getElementById("typingBox"),
+        lastTypingTime = 0;
 
     function init() {
         var btn_send = document.getElementById("btn_send"),
@@ -19,6 +21,18 @@ var App = (function() {
             initEventListener();
             addUserToOnlineUsers(nickname.value);
             socket.emit("new_user", nickname.value);
+        });
+
+        msg.addEventListener("keydown", function() {
+        	lastTypingTime = Date.now();
+        	socket.emit("typing", socket.id);
+
+        	setTimeout(function() {
+        		var typingTimer = Date.now();
+        		if ((typingTimer-lastTypingTime) >= 400) {
+        			socket.emit("stop-typing", socket.id);
+        		}
+        	}, 400);
         });
 
         btn_send.addEventListener("click", function() {
@@ -52,6 +66,14 @@ var App = (function() {
         socket.on("disconnected", function(user) {
             createMsgElement({ username: user, connected: false })
             removeUserFromOnlineUsers(user);
+        });
+
+        socket.on("typing", function(user) {
+        	typingBox.innerHTML = user + " is typing...";
+        });
+
+        socket.on("stop-typing", function(user) {
+        	typingBox.innerHTML = "";
         });
     }
 
